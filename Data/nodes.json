@@ -1,0 +1,201 @@
+/*
+	gg = general-gate
+	rs = ranger-stop
+	e  = entrance
+	c  = camping
+	g  = gate
+	rb = ranger-base
+*/
+
+// pos : [posx, posy]
+
+var nodes = {
+
+	// Entrances
+	"entrance0": {
+		"pos":		 [62, 13],
+		"neighbors": ["general-gate1", "gate0", "general-gate4", "gate6", "entrance3", "gate7", "general-gate7"]
+	},
+	"entrance1": {
+		"pos": 		 [17, 67],
+		"neighbors": ["gate2", "camping2", "camping4", "camping3", "camping0", "gate1", "general-gate7"]
+	},
+	"entrance2": {
+		"pos":		 [183, 87],
+		"neighbors": ["general-gate3", "gate3", "camping8", "camping1", "general-gate0", "general-gate2", "general-gate5",
+					 "gate4", "general-gate6", "gate5", "camping6", "gate8", "entrance4"]
+	},
+	"entrance3": {
+		"pos": 		 [115, 167],
+		"neighbors": ["gate6", "gate0", "general-gate1", "entrance0", "general-gate4", "gate7", "general-gate7"]
+	},
+	"entrance4": {
+		"pos":       [140, 184],
+		"neighbors": ["gate8", "camping6", "gate5", "general-gate6", "general-gate5", "gate4", "entrance2", "general-gate3",
+					 "gate3", "camping8", "camping1", "general-gate0", "general-gate2"]
+	},
+
+	// Gates
+	"gate0": {
+		"pos": 		 [63, 33],
+		"neighbors": ["gate1", "general-gate1", "entrance0", "general-gate4", "gate6", "entrance3", "gate7", "general-gate7"]
+	},
+	"gate1": {
+		"pos": 		 [58, 44],
+		"neighbors": ["camping0", "gate0", "camping1", "camping4", "camping2", "gate2", "camping1", "general-gate7"]
+	},
+	"gate2": {
+		"pos": 		 [24, 54],
+		"neighbors": ["ranger-stop1", "entrance1", "camping2", "camping4", "camping3", "camping0", "gate1", "general-gate7"]
+	},
+	"gate3": {
+		"pos": 		 [149, 60],
+		"neighbors": ["ranger-stop3", "camping8", "camping1", "general-gate0", "general-gate2", "general-gate3", "entrance2",
+					 "general-gate5", "gate4", "general-gate6", "gate5", "camping6", "gate8", "entrance4"]
+	},
+	"gate4": {
+		"pos": 		 [164, 114],
+		"neighbors": ["ranger-stop5", "entrance2", "general-gate3", "gate3", "camping8", "camping1", "general-gate0",
+					 "general-gate2", "general-gate5", "general-gate6", "gate5", "camping6", "gate8", "entrance8"]
+	},
+	"gate5": {
+		"pos": 		 [131, 146],
+		"neighbors": ["ranger-stop6", "entrance2", "general-gate3", "gate3", "camping8", "camping1", "general-gate0",
+					 "general-gate2", "general-gate5", "gate4", "general-gate6", "camping6", "gate8", "entrance4"]
+	},
+	"gate6": {
+		"pos": 		 [116, 151],
+		"neighbors": ["ranger-stop6", "entrance3", "gate6", "gate0", "general-gate1", "entrance0", "general-gate4", "gate7", "general-gate7"]
+	},
+	"gate7": {
+		"pos": 		 [97, 160],
+		"neighbors": ["ranger-stop7", "general-gate7", "entrance3", "gate6", "gate0", "general-gate1", "entrance0", "general-gate4", "gate7"]
+	},
+	"gate8": {
+		"pos": 		 [138, 181],
+		"neighbors": ["ranger-base", "entrance2", "general-gate3", "gate3", "camping8", "camping1", "general-gate0",
+					 "general-gate2", "general-gate5", "gate4", "general-gate6", "gate5", "camping6", "entrance4"]
+	},
+
+	// Ranger-stops
+	"ranger-stop0": {
+		"pos": 		 [89, 16],
+		"neighbors": ["ranger-stop2", "general-gate2"]
+	},
+	"ranger-stop1": {
+		"pos": 		 [19, 24],
+		"neighbors": ["gate2"]
+	},
+	"ranger-stop2": {
+		"pos": 		 [80, 35],
+		"neighbors": ["ranger-stop0", "general-gate1"]
+	},
+	"ranger-stop3": {
+		"pos": 		 [148, 45],
+		"neighbors": ["gate3"]
+	},
+	"ranger-stop4": {
+		"pos": 		 [18, 95],
+		"neighbors": ["camping5", "general-gate7"]
+	},
+	"ranger-stop5": {
+		"pos": 		 [151, 118],
+		"neighbors": ["gate4"]
+	},
+	"ranger-stop6": {
+		"pos": 		 [123, 147],
+		"neighbors": ["gate5", "gate6"]
+	},
+	"ranger-stop7": {
+		"pos": 		 [100, 152],
+		"neighbors": ["gate7"]
+	},
+
+	// Ranger-base
+	"ranger-base": {
+		"pos":		 [128, 175],
+		"neighbors": ["gate8"]
+	},
+
+	// Campings
+	"camping0": {
+		"pos":		 [52, 41],
+		"neighbors": ["entrance1", "gate2", "camping2", "camping4", "camping3", "gate1", "general-gate7"]
+	},
+	"camping1": {
+		"pos":		 [129, 50],
+		"neighbors": ["entrance2", "general-gate3", "gate3", "camping8", "general-gate0", "general-gate2", "general-gate5",
+					 "gate4", "general-gate6", "gate5", "camping6", "gate8", "entrance4"]
+	},
+	"camping2": {
+		"pos":		 [44, 64],
+		"neighbors": ["entrance1", "gate2", "camping4", "camping3", "camping0", "gate1", "general-gate7"]
+	},
+	"camping3": {
+		"pos":		 [45, 68],
+		"neighbors": ["entrance1", "gate2", "camping2", "camping4", "camping0", "gate1", "general-gate7"]
+	},
+	"camping4": {
+		"pos":		 [48, 89],
+		"neighbors": ["entrance1", "gate2", "camping2", "camping3", "camping0", "gate1", "general-gate7"]
+	},
+	"camping5": {
+		"pos":		 [20, 121],
+		"neighbors": ["ranger-stop4", "general-gate7"]
+	},
+	"camping6": {
+		"pos":		 [150, 177],
+		"neighbors": ["entrance4", "gate8", "gate5", "general-gate6", "general-gate5", "gate4", "entrance2", "general-gate3",
+					 "gate3", "camping8", "camping1", "general-gate0", "general-gate2"]
+	},
+	"camping7": {
+		"pos":		 [181, 145],
+		"neighbors": ["general-gate6"]
+	},
+	"camping8": {
+		"pos":		 [183, 48],
+		"neighbors": ["entrance2", "general-gate3", "gate3", "camping1", "general-gate0", "general-gate2", "general-gate5",
+					 "gate4", "general-gate6", "gate5", "camping6", "gate8", "entrance4"]
+	},
+
+	// General-gates
+	"general-gate0": {
+		"pos":		 [110, 9],
+		"neighbors": ["entrance2", "general-gate3", "gate3", "camping8", "camping1", "general-gate2", "general-gate5", "gate4",
+					 "general-gate6", "gate5", "camping6", "gate8", "entrance4"]
+	},
+	"general-gate1": {
+		"pos":		 [64, 25],
+		"neighbors": ["gate0", "general-gate4", "gate6", "entrance3", "gate7", "general-gate7", "entrance0"]
+	},
+	"general-gate2": {
+		"pos":		 [104, 32],
+		"neighbors": ["entrance2", "general-gate3", "camping8", "camping1", "general-gate0", "gate4", "general-gate5",
+					 "general-gate6", "gate5", "camping6", "gate8", "entrance4", "ranger-stop0"]
+	},
+	"general-gate3": {
+		"pos":		 [186, 55],
+		"neighbors": ["entrance2", "gate3", "camping8", "camping1", "general-gate0", "general-gate2", "general-gate5", "gate4",
+					 "general-gate6", "gate5", "camping6", "gate8", "entrance4"]
+	},
+	"general-gate4": {
+		"pos":		 [69, 98],
+		"neighbors": ["entrance0", "general-gate1", "gate0", "gate6", "entrance3", "gate7", "general-gate7"]
+	},
+	"general-gate5": {
+		"pos":		 [124, 111],
+		"neighbors": ["entrance2", "general-gate3", "gate3", "camping8","camping1", "general-gate0", "general-gate2", "gate4",
+					 "general-gate6", "gate5", "camping6", "gate8", "entrance4"]
+	},
+	"general-gate6": {
+		"pos":		 [136, 137],
+		"neighbors": ["entrance2", "general-gate3", "gate3", "camping8", "camping1", "general-gate0", "general-gate2", "general-gate5",
+					 "gate4", "gate5", "camping6", "gate8", "entrance4"]
+	},
+	"general-gate7": {
+		"pos":		 [65, 144],
+		"neighbors": ["camping5", "ranger-stop4", "entrance1", "gate2", "camping2", "camping4", "camping3", "camping0", "gate1", "entrance3",
+					 "gate6", "gate0", "general-gate1", "entrance0", "general-gate4", "gate7"]
+	}
+}
+
