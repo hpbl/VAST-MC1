@@ -69,9 +69,21 @@ function numberOfCars(dates, data){
 	var occ = new Array(groupedData.length).fill(0);
 	for(i=0; i<groupedData.length; i++){
 		data = crossfilter(groupedData[i]).dimension(function(d) { return d["gate-name"]; });
-		var onlyEntrance = data.filter(["entrance0","entrance4"]).top(Infinity);
-		onlyEntrance = uniqueCarId(onlyEntrance);
-		occ[i] = onlyEntrance.length;
+		var onlyEntrance0 = data.filter("entrance0").top(Infinity);
+		onlyEntrance0 = uniqueCarId(onlyEntrance0);
+		occ[i] += onlyEntrance0.length;
+		var onlyEntrance1 = data.filter("entrance1").top(Infinity);
+		onlyEntrance1 = uniqueCarId(onlyEntrance1);
+		occ[i] += onlyEntrance1.length;
+		var onlyEntrance2 = data.filter("entrance2").top(Infinity);
+		onlyEntrance2 = uniqueCarId(onlyEntrance2);
+		occ[i] += onlyEntrance2.length;
+		var onlyEntrance3 = data.filter("entrance3").top(Infinity);
+		onlyEntrance3 = uniqueCarId(onlyEntrance3);
+		occ[i] += onlyEntrance3.length;
+		var onlyEntrance4 = data.filter("entrance4").top(Infinity);
+		onlyEntrance4 = uniqueCarId(onlyEntrance4);
+		occ[i] += onlyEntrance4.length;
 	}
 
 	return occ;
@@ -79,5 +91,5 @@ function numberOfCars(dates, data){
 }
 
 // Tudo certo nada errado
-var groupedData = groupData(dates, data);
+var groupedData = numberOfCars(dates, data);
 
