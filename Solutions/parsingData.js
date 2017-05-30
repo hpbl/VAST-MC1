@@ -33,6 +33,15 @@ function uniqueCarType(data){
 	return (arr.unique());
 }
 
+// Function get unique Ids
+function uniqueCarId(data){
+	var arr = new Array();
+	for (j=0; j<data.length; j++) {
+		arr.push(data[j]["car-id"]);
+	}
+	return (arr.unique());
+}
+
 // Return each day with the cars that passes through. These days are divided by the types of the cars that passed.
 function groupData(dates, data){
 	var groupedData = new Array();
@@ -49,6 +58,24 @@ function groupData(dates, data){
 		groupedData[i] = groupedCars;
 	}
 	return groupedData;
+}
+
+function numberOfCars(dates, data){
+	var groupedData = new Array();
+	data = crossfilter(data).dimension(function(d) { return d.Timestamp; });
+	for(i=0; i<dates.length; i++){
+		groupedData.push(data.filter([(dates[i]+" 00:00:00"), (dates[i]+" 23:59:59")]).top(Infinity));
+	}
+	var occ = new Array(groupedData.length).fill(0);
+	for(i=0; i<groupedData.length; i++){
+		data = crossfilter(groupedData[i]).dimension(function(d) { return d["gate-name"]; });
+		var onlyEntrance = data.filter(["entrance0","entrance4"]).top(Infinity);
+		onlyEntrance = uniqueCarId(onlyEntrance);
+		occ[i] = onlyEntrance.length;
+	}
+
+	return occ;
+
 }
 
 // Tudo certo nada errado
