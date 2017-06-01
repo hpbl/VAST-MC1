@@ -13,6 +13,20 @@ for (index in gates) {
   gatesCarArray.push({[gates[index]]: gateDimension.filter(gates[index]).top(Infinity)})
 }
 
+var max = 0;
+var min = 10000;
+
+for (var i in gatesCarArray) {
+  for(var key in gatesCarArray[Object.keys(gatesCarArray)[i]]) break;
+  if(gatesCarArray[i][key].length>max) {
+    max = gatesCarArray[i][key].length;
+  }
+  if(gatesCarArray[i][key].length<min) {
+    min = gatesCarArray[i][key].length;
+  }
+}
+
+var sizeScale = d3.scaleLinear().range([1,10]).domain([min,max]);
 
 var mySVG = d3.select('body')
               .append('svg')
@@ -39,5 +53,8 @@ var circles = canvas.selectAll('circle').data(gatesCarArray)
 circles.enter().append('circle')
                 .attr('cx', function (d) { return nodes[Object.keys(d)[0]].pos[0] })
                 .attr('cy', function (d) { return nodes[Object.keys(d)[0]].pos[1] })
-                .attr('r', function (d) { return Object.values(d)[0].length / 1500 })
-                .attr('fill', function (d) { return "red" })
+                .attr('r', function (d) { return sizeScale(Object.values(d)[0].length) })
+                .attr('fill', "red")
+
+
+
