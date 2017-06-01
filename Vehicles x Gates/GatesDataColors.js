@@ -1,3 +1,9 @@
+//Tooltip
+var div = d3.select("body").append("div")
+    .attr("class", "tooltip")
+    .style("opacity", 0);
+
+
 // accessing data from ../Data
 var dataFilter = this.crossfilter(this.data)
 
@@ -26,7 +32,7 @@ for (var i in gatesCarArray) {
   }
 }
 
-var sizeScale = d3.scaleLinear().range([1,10]).domain([min,max]);
+var sizeScale = d3.scaleLinear().range([1.3,10]).domain([min,max]);
 
 var mySVG = d3.select('body')
               .append('svg')
@@ -55,6 +61,19 @@ circles.enter().append('circle')
                 .attr('cy', function (d) { return nodes[Object.keys(d)[0]].pos[1] })
                 .attr('r', function (d) { return sizeScale(Object.values(d)[0].length) })
                 .attr('fill', "red")
+                .on("mouseover", function(d) {
+                  div.transition()
+                    .duration(200)
+                    .style("opacity", .9);
+                  div.html(Object.values(d)[0].length)
+                    .style("left", (d3.event.pageX) + "px")
+                    .style("top", (d3.event.pageY - 28) + "px");
+                })
+                .on("mouseout", function (d) {
+                  div.transition()
+                    .duration(500)
+                    .style("opacity", 0);
+                });
 
 
 
