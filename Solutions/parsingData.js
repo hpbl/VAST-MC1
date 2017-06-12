@@ -92,7 +92,7 @@ function numberOfCars(dates, data){
 }
 
 // Tudo certo nada errado
-var groupedData = groupData(dates, data);
+var groupedData = numberOfCars(dates, data);
 
 
 

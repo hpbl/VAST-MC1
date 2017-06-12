@@ -1,6 +1,6 @@
 /*jshint esversion: 6 */
 class LineGraph{
-	 constructor(x, y, width,height, margin){
+	 constructor(x, y, width,height, margin, showY){
 		this.x = x;
 		this.y = y;
 		this.totalWidth = width;
@@ -8,6 +8,7 @@ class LineGraph{
 		this.hash = [];
 		this.days = [];
 		this.margin = margin;
+		this.showY = showY;
 
 		//
 		this.width = width - this.margin.left - this.margin.right;
@@ -54,7 +55,9 @@ class LineGraph{
 
 
 	 	xAxisGroup.call(xAxis);
-	 	yAxisGroup.call(yAxis);
+	 	if(this.showY==true) {
+	 		yAxisGroup.call(yAxis);
+	 	}
 
 
 
