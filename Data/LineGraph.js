@@ -1,3 +1,4 @@
+/*jshint esversion: 6 */
 class LineGraph{
 	 constructor(x, y, width,height, margin ){
 		this.x = x;
@@ -13,7 +14,7 @@ class LineGraph{
 		this.height = height - this.margin.top - this.margin.bottom;
 		//container is either svg or g
 		var that = this;
-		
+
 
 		this.mySvg = d3.select("body")
 	  				  .append("svg")
@@ -22,17 +23,17 @@ class LineGraph{
 	  				  .style("border", "1px solid black")
 	  				  .append("g")
 	  				  .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-		
+
 		//
 
 		this.xScale = d3.scaleTime().domain([new Date(2015, 4, 0), new Date(2016, 5, 10)]).range([40,this.width]);
 		this.yScale = d3.scaleLinear().domain([0,600]).range([this.height,0]);
 
-	
+
     }
 
     setData(newData){
-    
+
     	var parseDate = d3.timeParse("%Y-%m-%d");
     	var that = this;
     	//that.yScale.domain(d3.extent(newData, function(d){ return d; }));
@@ -48,7 +49,7 @@ class LineGraph{
 	  	var yAxisGroup = this.mySvg.append("g")
 	                        .attr("class", "yAxis");
 
-	  
+
 	  	var yAxis = d3.axisLeft(that.yScale).tickSize(-this.width);
 
 
@@ -68,7 +69,7 @@ class LineGraph{
 	      .attr("class", "line")
 	      .attr("d", valueline);
 
-		
+
 
 
     }
