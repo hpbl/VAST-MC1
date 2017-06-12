@@ -28,7 +28,7 @@ function uniqueData(data){
 function uniqueCarType(data){
 	var arr = [];
 	for (j=0; j<data.length; j++) {
-		arr.push(data[j]["car-type"]);
+		arr.push(data[j]['car-type']);
 	}
 	return (arr.unique());
 }
@@ -37,7 +37,7 @@ function uniqueCarType(data){
 function uniqueCarId(data){
 	var arr = [];
 	for (j=0; j<data.length; j++) {
-		arr.push(data[j]["car-id"]);
+		arr.push(data[j]['car-id']);
 	}
 	return (arr.unique());
 }
@@ -47,10 +47,10 @@ function groupData(dates, data){
 	var groupedData = [];
 	data = crossfilter(data).dimension(function(d) { return d.Timestamp; });
 	for(i=0; i<dates.length; i++){
-		groupedData.push(data.filter([(dates[i]+" 00:00:00"), (dates[i]+" 23:59:59")]).top(Infinity));
+		groupedData.push(data.filter([(dates[i]+' 00:00:00'), (dates[i]+' 23:59:59')]).top(Infinity));
 	}
 	for(i=0; i<groupedData.length; i++){
-		data = crossfilter(groupedData[i]).dimension(function(d) { return d["car-type"]; });
+		data = crossfilter(groupedData[i]).dimension(function(d) { return d['car-type']; });
 		var groupedCars = [];
 		for(j=0; j<car.length; j++){
 			groupedCars.push(data.filter(car[j]).top(Infinity));
@@ -60,28 +60,29 @@ function groupData(dates, data){
 	return groupedData;
 }
 
+// Return the number of cars passed through the park per day
 function numberOfCars(dates, data){
 	var groupedData = [];
 	data = crossfilter(data).dimension(function(d) { return d.Timestamp; });
 	for(i=0; i<dates.length; i++){
-		groupedData.push(data.filter([(dates[i]+" 00:00:00"), (dates[i]+" 23:59:59")]).top(Infinity));
+		groupedData.push(data.filter([(dates[i]+' 00:00:00'), (dates[i]+' 23:59:59')]).top(Infinity));
 	}
 	var occ = new Array(groupedData.length).fill(0);
 	for(i=0; i<groupedData.length; i++){
-		data = crossfilter(groupedData[i]).dimension(function(d) { return d["gate-name"]; });
-		var onlyEntrance0 = data.filter("entrance0").top(Infinity);
+		data = crossfilter(groupedData[i]).dimension(function(d) { return d['gate-name']; });
+		var onlyEntrance0 = data.filter('entrance0').top(Infinity);
 		onlyEntrance0 = uniqueCarId(onlyEntrance0);
 		occ[i] += onlyEntrance0.length;
-		var onlyEntrance1 = data.filter("entrance1").top(Infinity);
+		var onlyEntrance1 = data.filter('entrance1').top(Infinity);
 		onlyEntrance1 = uniqueCarId(onlyEntrance1);
 		occ[i] += onlyEntrance1.length;
-		var onlyEntrance2 = data.filter("entrance2").top(Infinity);
+		var onlyEntrance2 = data.filter('entrance2').top(Infinity);
 		onlyEntrance2 = uniqueCarId(onlyEntrance2);
 		occ[i] += onlyEntrance2.length;
-		var onlyEntrance3 = data.filter("entrance3").top(Infinity);
+		var onlyEntrance3 = data.filter('entrance3').top(Infinity);
 		onlyEntrance3 = uniqueCarId(onlyEntrance3);
 		occ[i] += onlyEntrance3.length;
-		var onlyEntrance4 = data.filter("entrance4").top(Infinity);
+		var onlyEntrance4 = data.filter('entrance4').top(Infinity);
 		onlyEntrance4 = uniqueCarId(onlyEntrance4);
 		occ[i] += onlyEntrance4.length;
 	}
@@ -91,7 +92,7 @@ function numberOfCars(dates, data){
 }
 
 // Tudo certo nada errado
-var groupedData = numberOfCars(dates, data);
+var groupedData = groupData(dates, data);
 
 
 
