@@ -45,17 +45,17 @@ function uniqueCarId(data){
 // Return a list of gates. Each gate is divided by the types of car that passed through it. Each type have the type's cars.
 function groupData(gates, data){
 	var groupedData = [];
-	data = crossfilter(data).dimension(function(d) { return d['gate-name']; });
+	var gateDimension = crossfilter(data).dimension(function(d) { return d['gate-name']; });
 
-	for(var i in gates) {
-		groupedData.push(data.filter(gates[i]).top(Infinity));
+	for(var i = 0; i < gates.length; i++) {
+		groupedData.push(gateDimension.filter(gates[i]).top(Infinity));
 	}
 
 	for(i=0; i<groupedData.length; i++){
-		data = crossfilter(groupedData[i]).dimension(function(d) { return d['car-type']; });
+		var typeDimension = crossfilter(groupedData[i]).dimension(function(d) { return d['car-type']; });
 		var groupedCars = [];
 		for(j=0; j<car.length; j++){
-			groupedCars.push(data.filter(car[j]).top(Infinity));
+			groupedCars.push(typeDimension.filter(car[j]).top(Infinity));
 		}
 		groupedData[i] = groupedCars;
 	}
@@ -95,6 +95,3 @@ function numberOfCars(dates, data){
 
 // Tudo certo nada errado
 var groupedData = groupData(gates, data);
-
-
-
