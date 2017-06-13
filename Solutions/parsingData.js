@@ -42,13 +42,15 @@ function uniqueCarId(data){
 	return (arr.unique());
 }
 
-// Return each day with the cars that passes through. These days are divided by the types of the cars that passed.
-function groupData(dates, data){
+// Return a list of gates. Each gate is divided by the types of car that passed through it. Each type have the type's cars.
+function groupData(gates, data){
 	var groupedData = [];
-	data = crossfilter(data).dimension(function(d) { return d.Timestamp; });
-	for(i=0; i<dates.length; i++){
-		groupedData.push(data.filter([(dates[i]+' 00:00:00'), (dates[i]+' 23:59:59')]).top(Infinity));
+	data = crossfilter(data).dimension(function(d) { return d['gate-name']; });
+
+	for(var i in gates) {
+		groupedData.push(data.filter(gates[i]).top(Infinity));
 	}
+
 	for(i=0; i<groupedData.length; i++){
 		data = crossfilter(groupedData[i]).dimension(function(d) { return d['car-type']; });
 		var groupedCars = [];
@@ -92,7 +94,7 @@ function numberOfCars(dates, data){
 }
 
 // Tudo certo nada errado
-var groupedData = numberOfCars(dates, data);
+var groupedData = groupData(gates, data);
 
 
 
