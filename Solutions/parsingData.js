@@ -47,14 +47,14 @@ function groupData(gates, data){
 	var groupedData = [];
 	var gateDimension = crossfilter(data).dimension(function(d) { return d['gate-name']; });
 
-	for(var i = 0; i < gates.length; i++) {
+	for(let i = 0; i < gates.length; i++) {
 		groupedData.push(gateDimension.filter(gates[i]).top(Infinity));
 	}
 
-	for(i=0; i<groupedData.length; i++){
+	for(let i=0; i<groupedData.length; i++){
 		var typeDimension = crossfilter(groupedData[i]).dimension(function(d) { return d['car-type']; });
 		var groupedCars = [];
-		for(j=0; j<car.length; j++){
+		for(let j=0; j<car.length; j++){
 			groupedCars.push(typeDimension.filter(car[j]).top(Infinity));
 		}
 		groupedData[i] = groupedCars;
