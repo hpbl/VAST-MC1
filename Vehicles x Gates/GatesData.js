@@ -25,8 +25,7 @@ var mySVG = d3.select('body')
                 .attr('width', 800)
 
 // adding bg image
-var background = mySVG.append('g')
-                      .attr('transform', 'translate(100, 100) scale(3, 3)')
+var background = mySVG.append('g');
 
 background.append('svg:image')
             .attr('xlink:href', '../Data/Lekagul Roadways.bmp')
@@ -35,16 +34,19 @@ background.append('svg:image')
             .attr('height', '200')
             .attr('width', '200')
 
-// plotting graph
-var canvas = mySVG.append('g')
-                  .attr('transform', 'translate(100, 100) scale(3, 3)')
-                  .attr('class', 'canvas')
+background.append('circle')
+            .attr('r',2)
+            .attr('opacity',0.5)
+            .attr('cx',19)
+            .attr('cy', 24)
+            .attr('fill', 'blue');
+
 
 var div = d3.select('body').append('div')
             .attr('class', 'tooltip')
             .style('opacity', 0)
 
-var points = canvas.selectAll('g')
+var points = background.selectAll('g')
                   .data(gatesCarArray)
                   .enter()
                   .append('g')
@@ -62,7 +64,7 @@ gatesCarArray.forEach( function(d) {
   piecharts.push(piechart)
 })
 
-canvas.attr('transform', 'translate(55, 55) scale(3, 3)') //fixing position
+// background.attr('transform', 'translate(55, 55) scale(3, 3)') //fixing position
 /* var circles = canvas.selectAll('circle').data(gatesCarArray)
 
 circles.enter().append('circle')

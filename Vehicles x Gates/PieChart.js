@@ -32,7 +32,7 @@ class PieChart {
     var translate = that.group.attr('transform')
     translate = translate.substring(translate.indexOf('(') + 1, translate.indexOf(')')).split(',')
 
-    that.group.attr('transform', `translate(${parseInt(translate[0])}, ${parseInt(translate[1])})`)
+    that.group.attr('transform', `translate(${parseInt(translate[0]) - that.radius}, ${parseInt(translate[1]) - that.radius})`)
     var svg = that.group.append('svg')
                 .attr('width', that.width)
                 .attr('height', that.height)
@@ -47,7 +47,7 @@ class PieChart {
     g.append('path')
           .attr('d', arc)
           .attr('fill', function (d, i) { return that.colorScale(i) })
-          .attr('opacity', '0.5')
+          .attr('opacity', '0.7')
 
     // g.append('text')
     //       .attr('transform', function (d) { return 'translate(' + labelArc.centroid(d) + ')' })
