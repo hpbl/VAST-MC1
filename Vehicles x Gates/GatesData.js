@@ -50,10 +50,10 @@ var points = background.selectAll('g')
 
 var piecharts = [];
 
-gatesCarArray.forEach( function(d) {
+gatesCarArray.forEach( function(d, index) {
   let currentGroup = document.getElementsByClassName(Object.keys(d)[0])[0]
   let currentDimensions = sizeScale(Object.values(d)[0].length)
   let piechart = new PieChart(currentGroup, currentDimensions, currentDimensions)
-  piechart.setData(umdata)
+  piechart.setData(groupedData[index])
   piecharts.push(piechart)
 })
