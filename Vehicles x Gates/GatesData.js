@@ -25,7 +25,8 @@ var mySVG = d3.select('body')
                 .attr('width', 800)
 
 // adding bg image
-var background = mySVG.append('g');
+var background = mySVG.append('g')
+                      .attr('transform', "translate(100, 100) scale(3, 3)")
 
 background.append('svg:image')
             .attr('xlink:href', '../Data/Lekagul Roadways.bmp')
@@ -33,13 +34,6 @@ background.append('svg:image')
             .attr('y', '0')
             .attr('height', '200')
             .attr('width', '200')
-
-background.append('circle')
-            .attr('r',2)
-            .attr('opacity',0.5)
-            .attr('cx',19)
-            .attr('cy', 24)
-            .attr('fill', 'blue');
 
 
 var div = d3.select('body').append('div')
@@ -63,26 +57,3 @@ gatesCarArray.forEach( function(d) {
   piechart.setData(umdata)
   piecharts.push(piechart)
 })
-
-// background.attr('transform', 'translate(55, 55) scale(3, 3)') //fixing position
-/* var circles = canvas.selectAll('circle').data(gatesCarArray)
-
-circles.enter().append('circle')
-                .attr('cx', function (d) { return nodes[Object.keys(d)[0]].pos[0] })
-                .attr('cy', function (d) { return nodes[Object.keys(d)[0]].pos[1] })
-                .attr('r', function (d) { return Object.values(d)[0].length / 1500 })
-                .attr('fill', function (d) { return "red" })
-                .on("mouseover", function(d) {
-                   div.transition()
-                     .duration(200)
-                     .style("opacity", .9);
-                   div.html(Object.keys(d)[0] + "<br/>" + Object.values(d)[0].length)
-                     .style("left", (d3.event.pageX) + "px")
-                     .style("top", (d3.event.pageY - 28) + "px");
-                })
-                .on("mouseout", function(d) {
-                  div.transition()
-                    .duration(500)
-                    .style("opacity", 0);
-                  });
-*/

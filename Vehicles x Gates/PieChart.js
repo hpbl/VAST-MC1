@@ -47,11 +47,6 @@ class PieChart {
     g.append('path')
           .attr('d', arc)
           .attr('fill', function (d, i) { return that.colorScale(i) })
-          .attr('opacity', '0.7')
-
-    // g.append('text')
-    //       .attr('transform', function (d) { return 'translate(' + labelArc.centroid(d) + ')' })
-    //       .attr('dy', '.35em')
-    //       .text(function (d, i) { return window.car[i] })
+          .attr('opacity', '0.9 ')
   }
 }
