@@ -95,3 +95,4 @@ function numberOfCars(dates, data){
 
 // Tudo certo nada errado
 var groupedData = groupData(gates, data);
+var groupedNumberOfCars = numberOfCars(dates, data);
