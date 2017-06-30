@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Time Line</title>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="../Assets/crossfilter2/crossfilter.min.js"></script>
+    <style>
+        .container{
+            float:left;
+            height: 600px;
+            width:600px;
+            padding:3px;
+            overflow-y: auto;
+        }
+
+		div.tooltip {
+			position: absolute;
+			text-align: center;
+			width: 80px;
+			/*height: 50px;  */
+			padding: 2px;
+			font: 10px sans-serif;
+			background: lightsteelblue;
+			border: 0px;
+			border-radius: 3px;
+			pointer-events: none;
+			z-index: 1;
+		}
+
+    </style>
+  </head>
+
+      <div class="container">
+          <div id="viz" class="content"></div>
+      </div>
+
+    <body>
+        <script src="../Data/uniquedates.js"></script>
+        <script src="../Data/Parsed Lekagul Sensor Data.json"></script>
+        <script src="../Data/nodes.json"></script>
+    	<script src="Preprocess.js"></script>
+    	<script src="timeline.js"></script>
+        <script src="testa.js"></script>
+    </body>
+</html>
