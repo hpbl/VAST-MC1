@@ -5,7 +5,7 @@ height = 500 - margin.top - margin.bottom;
 
 
 
-var mySvg = d3.select("body")
+var mySvg = d3.select(".histogram")
   				  .append("svg")
   				  .attr("width", width + margin.left + margin.right)
   				  .attr("height", height + margin.top + margin.bottom)

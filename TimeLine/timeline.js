@@ -7,14 +7,14 @@ height2 = 8000, width2 = 600;
 var cars  = [];
 var mark  = [];
 
-var mySvg2 = d3.select("#viz")
+var mySvg2 = d3.select(".timeline")
   				  .append("svg")
   				  .attr("width", width2 + margin.left + margin.right)
   				  .attr("height", height2 + margin.top + margin.bottom)
                   .append("g")
                   .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-var div = d3.select("body").append("div")
+var div = d3.select(".timeline").append("div")
   					.attr("class", "tooltip")
   					.style("display", "none");
 

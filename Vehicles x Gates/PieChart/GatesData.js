@@ -19,7 +19,7 @@ var lengths = gatesCarArray.map(function(d) {
 
 var sizeScale = d3.scaleLinear().range([25, 40]).domain(d3.extent(lengths))
 
-var mySVG = d3.select('body')
+var mySVG = d3.select('.piechart')
               .append('svg')
                 .attr('height', 800)
                 .attr('width', 800)
@@ -29,14 +29,14 @@ var background = mySVG.append('g')
                       .attr('transform', "translate(100, 100) scale(3, 3)")
 
 background.append('svg:image')
-            .attr('xlink:href', '../../maps/Lekagul Roadways.bmp')
+            .attr('xlink:href', '../maps/Lekagul Roadways.bmp')
             .attr('x', '0')
             .attr('y', '0')
             .attr('height', '200')
             .attr('width', '200')
 
 
-var div = d3.select('body').append('div')
+var div = d3.select('.piechart').append('div')
             .attr('class', 'tooltip')
             .style('opacity', 0)
 
