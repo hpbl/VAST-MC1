@@ -3,6 +3,8 @@ var margin = {top: 10, right: 40, bottom: 30, left: 40};
 width = 960 - margin.left - margin.right;
 height = 500 - margin.top - margin.bottom;
 
+var currentGates = ['entrance1']
+var currentX0, currentX1
 
 
 var mySvg = d3.select(".histogram")
@@ -77,8 +79,8 @@ function brushed() {
     // var s = d3.event.selection || x.range();
     // x.domain(s.map(x.invert, x));
 
-    var x0 = x.invert(d3.event.selection[0]), x1 = x.invert(d3.event.selection[1]);
+    var currentX0 = x.invert(d3.event.selection[0]), currentX1 = x.invert(d3.event.selection[1]);
 
-    if (x0 !== null && x1 !== null)
-        generateTimeLine('entrance1', x0, x1);
+    if (currentX0 !== null && currentX1 !== null)
+        generateTimeLine(currentGates, currentX0, currentX1);
 }

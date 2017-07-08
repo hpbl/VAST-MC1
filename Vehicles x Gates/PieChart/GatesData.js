@@ -45,7 +45,22 @@ var points = background.selectAll('g')
                   .enter()
                   .append('g')
                   .attr('transform', function (d) { return 'translate(' + nodes[Object.keys(d)[0]].pos[0] + ',' + nodes[Object.keys(d)[0]].pos[1] + ')' })
-                  .attr('class', function(d) { return Object.keys(d) })//[0]?
+                  .attr('class', function(d) { return Object.keys(d)[0] })//[0]?
+                  .on('click', function(d) {
+                    handleClick(Object.keys(d)[0])
+                  })
+
+
+function handleClick(groupClass) {
+  if (!currentGates.contains(groupClass)) {
+      currentGates.push(groupClass)
+  } else {
+    let index = currentGates.indexOf(groupClass)
+    currentGates.splice(index, 1)
+  }
+
+  generateTimeLine(currentGates, currentX0, currentX1);
+}
 
 
 var piecharts = [];
