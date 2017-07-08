@@ -1,4 +1,4 @@
-var margin = {top:50, left:50, right:50, bottom:50};
+var margin = {top:10, left:50, right:50, bottom:50};
 var colors = ["#1b70fc", "#faff16", "#d50527", "#158940", "#f898fd", "#24c9d7", "#cb9b64", "#866888", "#22e67a", "#e509ae", "#9dabfa", "#437e8a", "#b21bff", "#ff7b91", "#94aa05", "#ac5906", "#82a68d", "#fe6616", "#7a7352", "#f9bc0f", "#b65d66", "#07a2e6", "#c091ae", "#8a91a7", "#88fc07", "#ea42fe", "#9e8010", "#10b437", "#c281fe", "#f92b75", "#07c99d", "#a946aa", "#bfd544", "#16977e", "#ff6ac8", "#a88178", "#5776a9", "#678007", "#fa9316", "#85c070"];
 
 
@@ -17,8 +17,6 @@ var mySvg2 = d3.select(".timeline")
 var div = d3.select(".timeline").append("div")
   					.attr("class", "tooltip")
   					.style("display", "none");
-
-console.log("passou porra");
 
 var yScale = d3.scaleLinear().range([height2, 0]);
 var xScale = d3.scaleLinear().domain([0,1000]).range([0,width2]);
@@ -54,7 +52,7 @@ function generateTimeLine(gate, start, end) {
             for(var j = 0; j < aux.length; j++) {
                 if(aux[j].time > end) break;
                 if(aux[j].time >= start){
-                    cars.push({"x": 60*conta, "y" : 5*numCar, "gate": aux[j]['gate'], "time" : aux[j].time } );
+                    cars.push({"x": 32*conta, "y" : 1.5*numCar, "gate": aux[j]['gate'], "time" : aux[j].time } );
                     conta++;
                 }
             }
@@ -74,19 +72,19 @@ function generateTimeLine(gate, start, end) {
 
     timeLine.attr("x", function(d){ return xScale(d.x); })
              .attr("y", function(d){ return height2 - yScale(d.y); } )
-             .attr("width", xScale(30) )
-             .attr("height", height2 - yScale(3) )
+             .attr("width", 20 )
+             .attr("height", 5 )
              .attr("fill", function(d){ return colorScale(d.gate); })
              .on("mouseover", mouseover)
 			 .on("mouseout", mouseout)
-			 .on("mousemove", function(d){ mousemove(d); });;
+			 .on("mousemove", function(d){ mousemove(d); });
 
      timeLine.enter()
              .append("rect")
              .attr("x", function(d){ return xScale(d.x); })
              .attr("y", function(d){ return height2 - yScale(d.y); } )
-             .attr("width", xScale(30) )
-             .attr("height", height2 - yScale(3) )
+             .attr("width", 20 )
+             .attr("height", 5 )
              .attr("fill", function(d){ return colorScale(d.gate); })
              .on("mouseover", mouseover)
 			 .on("mouseout", mouseout)

@@ -1,7 +1,7 @@
 var margin = {top: 10, right: 40, bottom: 30, left: 40};
 
 width = 960 - margin.left - margin.right;
-height = 500 - margin.top - margin.bottom;
+height = 200 - margin.top - margin.bottom;
 
 var currentGates = ['entrance1']
 var currentX0, currentX1

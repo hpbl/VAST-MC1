@@ -4,29 +4,35 @@
 <head>
     <meta charset="utf-8">
     <title>G04</title>
-    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="../libs/d3.v4.min.js"></script>
     <script src="../libs/crossfilter2/crossfilter.min.js"></script>
     <style>
+    rect.bar { fill: steelblue; }
     .container {
-      background-color: black;
+      /*background-color: black;*/
       display: flex;
       flex-direction: column;
+      -webkit-justify-content: center;
+              justify-content: center;
+      -webkit-align-items: center;
+              align-items: center;
     }
 
     .piechart {
-      background-color: tomato;
-      flex: 1 0 0;
+      /*background-color: tomato;*/
     }
 
     .timeline {
-      background-color: cyan;
-      flex: 1 0 0;
-      height: 900px;
+      /*background-color: cyan;*/
+      height: 500px;
+      float:left;
       overflow-y: auto;
     }
 
     .histogram {
-      background-color: green;
+      margin-top: 2em;
+      /*background-color: green;*/
+      display: block;
     }
 
     .top {
@@ -38,11 +44,11 @@
 <body>
   <div class="container">
     <div class="top">
-      <div class="piechart">PieChart Aqui</div>
-      <div class="timeline">Timeline Aqui</div>
+      <div class="piechart"></div>
+      <div class="timeline"></div>
     </div>
     <div class="bottom">
-      <div class="histogram">Histogram Aqui</div>
+      <div class="histogram"></div>
     </div>
   </div>
 
