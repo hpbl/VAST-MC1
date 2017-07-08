@@ -21,12 +21,12 @@ var sizeScale = d3.scaleLinear().range([25, 40]).domain(d3.extent(lengths))
 
 var mySVG = d3.select('.piechart')
               .append('svg')
-                .attr('height', 800)
+                .attr('height', 500)
                 .attr('width', 800)
 
 // adding bg image
 var background = mySVG.append('g')
-                      .attr('transform', "translate(100, 100) scale(3, 3)")
+                      .attr('transform', "translate(150, 10) scale(2.5, 2.5)")
 
 background.append('svg:image')
             .attr('xlink:href', '../maps/Lekagul Roadways.bmp')
