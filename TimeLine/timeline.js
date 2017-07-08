@@ -18,7 +18,7 @@ var div = d3.select(".timeline").append("div")
   					.attr("class", "tooltip")
   					.style("display", "none");
 
-var yScale = d3.scaleLinear().range([height2, 0]);
+var yScale = d3.scaleLinear().domain([0, 1000]).range([height2, 0]);
 var xScale = d3.scaleLinear().domain([0,1000]).range([0,width2]);
 
 
@@ -27,42 +27,58 @@ var colorScale = d3.scaleOrdinal().domain(gates).range(colors);
 
 var format = d3.timeFormat("%Y-%m-%d %H:%M:%S");
 
-function generateTimeLine(gate, start, end) {
+function generateTimeLine(currentGates, start, end) {
+    let gate = currentGates[0];
+    var id = gates.indexOf(gate);
 
-    id = gates.indexOf(gate);
-
-    tv = v[id];
-    cars = [];
+    var tv = v[id];
+    var cars = [];
     var numCar = 0;
-    for(var i = 0; i < tv.length; i++) {
+    var mySet = new Set();
 
+    for(let i = 0; i < tv.length; i++) {
+        var t1 = [], pass = [];
         var aux = data2[tv[i]];
         var boo = 0;
 
-        for ( var j = 0; j < aux.length; j++) {
-            //console.log(" " + aux[j].time + " " + );
+        for ( let j = 0; j < aux.length; j++) {
             if (aux[j].time >= start && aux[j].time <= end && aux[j]['gate'] == gate) {
                 boo = 1;
-                numCar++;
                 break;
             }
         }
-        if(boo === 1) {
-            conta = 0;
-            for(var j = 0; j < aux.length; j++) {
+
+        if(boo === 1 ) {
+
+            for(let j = 0; j < currentGates.length; j++) {
+                pass[currentGates[j]] = 0;
+            }
+
+            for(let j = 0; j < aux.length; j++) {
                 if(aux[j].time > end) break;
-                if(aux[j].time >= start){
-                    cars.push({"x": 32*conta, "y" : 1.5*numCar, "gate": aux[j]['gate'], "time" : aux[j].time } );
-                    conta++;
+                if(aux[j].time >= start) {
+                    t1.push(aux[j]['gate']);
+                    pass[aux[j]['gate']] = 1;
                 }
             }
 
+            let boo2 = 1;
+            for(let j = 0; j < currentGates.length; j++) {
+                boo2 &= pass[currentGates[j]];
+            }
+
+            if(mySet.has(t1) === false && boo2 == 1) {
+                mySet.add(t1);
+                conta = 0;
+                numCar++;
+                for(let j = 0; j < aux.length; j++) {
+                    if(aux[j].time > end) break;
+                        cars.push({"x": 32*conta, "y" : 1.2*numCar, "gate": aux[j]['gate'], "time" : aux[j].time } );
+                        conta++;
+                    }
+                }
+            }
         }
-    }
-
-
-
-    yScale.domain([0, 1000]);
 
 
     var timeLine = mySvg2.selectAll("rect")
@@ -71,7 +87,7 @@ function generateTimeLine(gate, start, end) {
     timeLine.exit().remove();
 
     timeLine.attr("x", function(d){ return xScale(d.x); })
-             .attr("y", function(d){ return height2 - yScale(d.y); } )
+             .attr("y", function(d){ console.log('x'+ d.y);return height2 - yScale(d.y); } )
              .attr("width", 20 )
              .attr("height", 5 )
              .attr("fill", function(d){ return colorScale(d.gate); })
@@ -90,8 +106,9 @@ function generateTimeLine(gate, start, end) {
 			 .on("mouseout", mouseout)
 			 .on("mousemove", function(d){ mousemove(d); });
 
-}
+       console.log(mySet)
 
+}
 
 function mouseover() {
     div.style("display", "inline");
