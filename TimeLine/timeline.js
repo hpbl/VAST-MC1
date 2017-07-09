@@ -75,6 +75,11 @@ function generateTimeLine(currentGates, start, end) {
                 if(mySet.has(str) == false && boo2 == 1) {
                     mySet.add(str);
                     paths.push(str);
+
+                    let tpaths = str.split(" ");
+                    tpaths.pop();
+
+                    //console.log(tpaths);
                 }
             }
         }
@@ -83,7 +88,7 @@ function generateTimeLine(currentGates, start, end) {
         for(let i = 0; i < paths.length; i++) {
             let tpaths = paths[i].split(" ");
             tpaths.pop();
-            
+
             for(let j = 0; j < tpaths.length; j++) {
                 cars.push({"x": 10*j, "y": 1.0*i, "gate": tpaths[j] } );
             }

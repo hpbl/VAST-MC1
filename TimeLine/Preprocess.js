@@ -4,12 +4,16 @@ var v = [];
 var vis = [];
 var parseDate = d3.timeParse("%Y-%m-%d %H:%M:%S");
 
+
 for(let i = 0; i < data.length; i++) {
     id = data[i]['car-id'];
-    if(vis[id] === undefined) data2[id] = [];
+    if(vis[id] === undefined){
+        data2[id] = [];
+    }
     vis[id] = 1;
     data2[id].push( {"time" : parseDate(data[i]['Timestamp']) , "gate" : data[i]['gate-name'] } );
 }
+
 
 var groupedData = [];
 var mark = {};
