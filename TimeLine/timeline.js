@@ -90,7 +90,7 @@ function generateTimeLine(currentGates, start, end) {
             tpaths.pop();
 
             for(let j = 0; j < tpaths.length; j++) {
-                cars.push({"x": 10*j, "y": 1.0*i, "gate": tpaths[j] } );
+                cars.push({"x": 9*j, "y": 0.7*i, "gate": tpaths[j] } );
             }
         }
 
@@ -103,8 +103,8 @@ function generateTimeLine(currentGates, start, end) {
 
     timeLine.attr("x", function(d){ return xScale(d.x); })
              .attr("y", function(d){ return height2 - yScale(d.y); } )
-             .attr("width", 20 )
-             .attr("height", 10 )
+             .attr("width", 13 )
+             .attr("height", 5 )
              .attr("fill", function(d){ return colorScale(d.gate); })
              .on("mouseover", mouseover)
 			 .on("mouseout", mouseout)
@@ -114,8 +114,8 @@ function generateTimeLine(currentGates, start, end) {
              .append("rect")
              .attr("x", function(d){ return xScale(d.x); })
              .attr("y", function(d){ return height2 - yScale(d.y); } )
-             .attr("width", 20 )
-             .attr("height", 10 )
+             .attr("width", 13 )
+             .attr("height", 5 )
              .attr("fill", function(d){ return colorScale(d.gate); })
              .on("mouseover", mouseover)
 			 .on("mouseout", mouseout)
