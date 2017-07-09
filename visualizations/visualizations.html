@@ -4,9 +4,18 @@
 <head>
     <meta charset="utf-8">
     <title>G04</title>
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
     <script src="../libs/d3.v4.min.js"></script>
     <script src="../libs/crossfilter2/crossfilter.min.js"></script>
     <style>
+    body {
+      font-family: 'Raleway', sans-serif;
+    }
+    p {
+      margin-bottom: 0;
+      margin-left: 1em;
+      color: #455A64;
+    }
     rect.bar { fill: steelblue; }
     .container {
       /*background-color: black;*/
@@ -39,13 +48,26 @@
     .top {
       display: flex;
     }
+
+    #activegates {
+      text-align: center;
+    }
+
+    #active {
+      color: black;
+      font-size: 18px;
+      font-style: italic;
+    }
+
     </style>
 </head>
 
 <body>
   <div class="container">
     <div class="top">
-      <div class="piechart"></div>
+      <div class="piechart">
+        <p id='activegates'><span id='active'>Active Gates: </span></p>
+      </div>
       <div class="timeline"></div>
     </div>
     <div class="bottom">
@@ -62,6 +84,6 @@
   <script src="../Vehicles x Gates/PieChart/GatesData.js"></script>
 
   <script src="../TimeLine/Preprocess.js"></script>
-  <script src="../TimeLine/timeline.js"> </script>
+  <script src="../TimeLine/timeline.js"></script>
   <script src="../Histogram/histogram.js"></script>
 </body>
