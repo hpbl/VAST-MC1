@@ -47,6 +47,6 @@ class PieChart {
     g.append('path')
           .attr('d', arc)
           .attr('fill', function (d, i) { return that.colorScale(i) })
-          .attr('opacity', '0.9 ')
+          .attr('opacity', '0.7')
   }
 }

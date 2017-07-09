@@ -53,12 +53,13 @@ var points = background.selectAll('g')
 
 function handleClick(groupClass) {
   if (!currentGates.contains(groupClass)) {
-      console.log(groupClass);
+      d3.select('.'+groupClass).selectAll('path')
+        .attr('opacity','1');
+      console.log('.'+groupClass);
       d3.select('.piechart').select('#activegates')
         .append('span')
         .attr('id', groupClass)
         .html(groupClass+', ');
-
       currentGates.push(groupClass)
   } else {
     let index = currentGates.indexOf(groupClass)
@@ -66,6 +67,8 @@ function handleClick(groupClass) {
     d3.select('.piechart').select('#activegates')
       .select('#'+groupClass)
       .remove();
+    d3.select('.'+groupClass).selectAll('path')
+        .attr('opacity','0.5');
   }
 
   generateTimeLine(currentGates, currentX0, currentX1);
