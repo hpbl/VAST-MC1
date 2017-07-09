@@ -88,7 +88,7 @@ function generateTimeLine(currentGates, start, end) {
     timeLine.exit().remove();
 
     timeLine.attr("x", function(d){ return xScale(d.x); })
-             .attr("y", function(d){ console.log('x'+ d.y);return height2 - yScale(d.y); } )
+             .attr("y", function(d){ return height2 - yScale(d.y); } )
              .attr("width", 20 )
              .attr("height", 5 )
              .attr("fill", function(d){ return colorScale(d.gate); })
