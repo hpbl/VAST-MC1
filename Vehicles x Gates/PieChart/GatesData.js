@@ -49,17 +49,21 @@ var points = background.selectAll('g')
                   .on('click', function(d) {
                     handleClick(Object.keys(d)[0])
                   })
+                  .on('mouseover', function(d) {
+                    mouseon(Object.keys(d)[0]);
+                  })
+                  .on('mouseout', function(d) {
+                    mousenoton(Object.keys(d)[0]);
+                  });
 
 
 function handleClick(groupClass) {
   if (!currentGates.contains(groupClass)) {
       d3.select('.'+groupClass).selectAll('path')
         .attr('opacity','1');
-      console.log('.'+groupClass);
       d3.select('.piechart').select('#activegates')
-        .append('span')
-        .attr('id', groupClass)
-        .html(groupClass+', ');
+        .select('#'+groupClass)
+        .attr('style','1');
       currentGates.push(groupClass)
   } else {
     let index = currentGates.indexOf(groupClass)
@@ -74,7 +78,6 @@ function handleClick(groupClass) {
   generateTimeLine(currentGates, currentX0, currentX1);
 }
 
-
 var piecharts = [];
 
 gatesCarArray.forEach( function(d, index) {
@@ -84,3 +87,23 @@ gatesCarArray.forEach( function(d, index) {
   piechart.setData(groupedData[index])
   piecharts.push(piechart)
 })
+
+function mouseon(d) {
+  if (!currentGates.contains(d)) {
+    d3.select('.piechart').select('#activegates')
+        .append('span')
+        .attr('id', d)
+        .attr('style','opacity: 0.3;')
+        .html(d+', ');
+  } else {
+    d3.select('#activegates').select('#'+d).attr('style','color: red;');
+  }
+}
+
+function mousenoton(d) {
+  if (!currentGates.contains(d)) {
+    d3.select('#activegates').select('#'+d).remove();
+  } else {
+    d3.select('#activegates').select('#'+d).attr('style','color: #455A64;');
+  }
+}
