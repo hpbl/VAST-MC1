@@ -37,7 +37,8 @@ function generateTimeLine(currentGates, start, end) {
     var mySet = new Set();
 
     for(let i = 0; i < tv.length; i++) {
-        var t1 = [], pass = [];
+        var pass = [], str = "";
+
         var aux = data2[tv[i]];
         var boo = 0;
 
@@ -57,7 +58,7 @@ function generateTimeLine(currentGates, start, end) {
             for(let j = 0; j < aux.length; j++) {
                 if(aux[j].time > end) break;
                 if(aux[j].time >= start) {
-                    t1.push(aux[j]['gate']);
+                    str += aux[j]['gate'];
                     pass[aux[j]['gate']] = 1;
                 }
             }
@@ -67,8 +68,8 @@ function generateTimeLine(currentGates, start, end) {
                 boo2 &= pass[currentGates[j]];
             }
 
-            if(mySet.has(t1) === false && boo2 == 1) {
-                mySet.add(t1);
+            if(mySet.has(str) === false && boo2 == 1) {
+                mySet.add(str);
                 conta = 0;
                 numCar++;
                 for(let j = 0; j < aux.length; j++) {
