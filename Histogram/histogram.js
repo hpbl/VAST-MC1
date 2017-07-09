@@ -79,7 +79,8 @@ function brushed() {
     // var s = d3.event.selection || x.range();
     // x.domain(s.map(x.invert, x));
 
-    currentX0 = x.invert(d3.event.selection[0]), currentX1 = x.invert(d3.event.selection[1]);
+    currentX0 = x.invert(d3.event.selection[0]);
+    currentX1 = x.invert(d3.event.selection[1]);
 
     if (currentX0 !== null && currentX1 !== null)
         generateTimeLine(currentGates, currentX0, currentX1);
