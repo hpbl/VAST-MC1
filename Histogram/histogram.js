@@ -65,12 +65,12 @@ mySvg.append("g")
   .call(brush.move, x.range());
 
 mySvg.append("g")
-   .attr("transform", "translate(0," + height + ")")
-   .call(d3.axisBottom(x));
+     .attr("transform", "translate(0," + height + ")")
+     .call(d3.axisBottom(x));
 
 // add the y Axis
 mySvg.append("g")
-   .call(d3.axisLeft(y));
+     .call(d3.axisLeft(y));
 
 
 function brushed() {
@@ -79,7 +79,7 @@ function brushed() {
     // var s = d3.event.selection || x.range();
     // x.domain(s.map(x.invert, x));
 
-    var currentX0 = x.invert(d3.event.selection[0]), currentX1 = x.invert(d3.event.selection[1]);
+    currentX0 = x.invert(d3.event.selection[0]), currentX1 = x.invert(d3.event.selection[1]);
 
     if (currentX0 !== null && currentX1 !== null)
         generateTimeLine(currentGates, currentX0, currentX1);
