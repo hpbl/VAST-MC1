@@ -22,19 +22,26 @@ var yScale = d3.scaleLinear().domain([0, 1000]).range([height2, 0]);
 var xScale = d3.scaleLinear().domain([0,1000]).range([0,width2]);
 
 
-
 var colorScale = d3.scaleOrdinal().domain(gates).range(colors);
 
 var format = d3.timeFormat("%Y-%m-%d %H:%M:%S");
 
+//scatterplot
+
+var carsPaths = [];
+let paths = [];
+
+var scp = new ScatterPlot(0,0,500,500, margin);
 function generateTimeLine(currentGates, start, end) {
 
     var cars = [];
+    carsPaths = [];
+
     if(currentGates.length > 0) {
 
         let gate = currentGates[0];
 
-        let paths = [];
+        paths = [];
         var id = gates.indexOf(gate);
 
         var tv = v[id];
@@ -54,6 +61,9 @@ function generateTimeLine(currentGates, start, end) {
             }
 
             if(boo === 1 ) {
+                //scatterplot
+                let mini = new Date(2016, 5, 1), maxi = new Date(2015, 4, 1);
+                //scatterplot
 
                 for(let j = 0; j < currentGates.length; j++) {
                     pass[currentGates[j]] = 0;
@@ -64,6 +74,10 @@ function generateTimeLine(currentGates, start, end) {
                     if(aux[j].time >= start) {
                         str += aux[j]['gate'] + " ";
                         pass[aux[j]['gate']] = 1;
+                        //scatterplot
+                        mini = d3.min([mini, aux[j].time]);
+                        maxi = d3.max([maxi, aux[j].time]);
+                        //scatterplot
                     }
                 }
 
@@ -72,14 +86,20 @@ function generateTimeLine(currentGates, start, end) {
                     boo2 &= pass[currentGates[j]];
                 }
 
-                if(mySet.has(str) == false && boo2 == 1) {
-                    mySet.add(str);
-                    paths.push(str);
+                if( boo2 == 1) {
+                    if(mySet.has(str) == false) {
+                        mySet.add(str);
+                        paths.push(str);
 
-                    let tpaths = str.split(" ");
-                    tpaths.pop();
+                        carsPaths[str] = []; // scatterplot
+                    }
 
-                    //console.log(tpaths);
+                    //scatterplot
+                    let milliseconds = maxi - mini;
+
+                    let hours = (milliseconds / (1000*60*60));
+                    carsPaths[str].push( {"x": hours, "y": carsType[tv[i]], "id": tv[i]} );
+                    //scatterplot
                 }
             }
         }
@@ -88,9 +108,9 @@ function generateTimeLine(currentGates, start, end) {
         for(let i = 0; i < paths.length; i++) {
             let tpaths = paths[i].split(" ");
             tpaths.pop();
-
+            console.log(paths[i]);
             for(let j = 0; j < tpaths.length; j++) {
-                cars.push({"x": 9*j, "y": 0.7*i, "gate": tpaths[j] } );
+                cars.push({"x": 9*j, "y": 0.7*i, "gate": tpaths[j], "line": i} );
             }
         }
 
@@ -99,6 +119,7 @@ function generateTimeLine(currentGates, start, end) {
     var timeLine = mySvg2.selectAll("rect")
                          .data(cars);
 
+
     timeLine.exit().remove();
 
     timeLine.attr("x", function(d){ return xScale(d.x); })
@@ -106,9 +127,7 @@ function generateTimeLine(currentGates, start, end) {
              .attr("width", 13 )
              .attr("height", 5 )
              .attr("fill", function(d){ return colorScale(d.gate); })
-             .on("mouseover", mouseover)
-			 .on("mouseout", mouseout)
-			 .on("mousemove", function(d){ mousemove(d); });
+             .on("click", function(d,i){ clicked(d.line); });
 
      timeLine.enter()
              .append("rect")
@@ -117,10 +136,18 @@ function generateTimeLine(currentGates, start, end) {
              .attr("width", 13 )
              .attr("height", 5 )
              .attr("fill", function(d){ return colorScale(d.gate); })
-             .on("mouseover", mouseover)
-			 .on("mouseout", mouseout)
-			 .on("mousemove", function(d){ mousemove(d); });
+             .on("click", function(d,i){ clicked(d.line); });
 
+
+}
+
+function clicked(index){
+    //scatterplot
+    console.log("passou");
+    console.log(index);
+    console.log(carsPaths[paths[index]] );
+
+    scp.generateScatterPlot( carsPaths[paths[index]] );
 }
 
 function mouseover() {

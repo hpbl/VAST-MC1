@@ -23,9 +23,23 @@ class ScatterPlot{
 		this.xScale = d3.scaleLinear().range([0, this.width]);
 
 		this.yScale = d3.scalePoint()
-                        .domain(["1", "2", "2P","3", "4", "5"])
+                        .domain(["1", "2", "2P","3", "4", "5", "6"])
                         .range([this.height, 0 ])
                         .padding(1);
+
+        this.xAxisGroup = that.mySvg.append("g")
+	                        .attr("class", "xAxis")
+	                        .attr("transform", "translate(0"  + "," + that.height + ")");
+
+	  	var xAxis = d3.axisBottom(that.xScale).ticks(10);
+
+	  	this.yAxisGroup = that.mySvg.append("g")
+	                        .attr("class", "yAxis");
+
+	  	var yAxis = d3.axisLeft(that.yScale);
+
+	 	this.xAxisGroup.call(xAxis);
+	 	this.yAxisGroup.call(yAxis);
 
         this.colorScale = d3.scaleOrdinal(d3.schemeCategory10);
     }
@@ -33,23 +47,20 @@ class ScatterPlot{
     generateScatterPlot(newData){
 
         var that = this;
-		that.xScale.domain(d3.extent(newData,function(d){ return d.x; } ));
+        if(newData.length == 1){
+            that.xScale.domain([0,newData[0].x]);
+        }else{
+            that.xScale.domain(d3.extent(newData,function(d){ return d.x; } ));
+        }
 
-		var xAxisGroup = that.mySvg.append("g")
-	                        .attr("class", "xAxis")
-	                        .attr("transform", "translate(0"  + "," + that.height + ")");
+	  	var xAxis = d3.axisBottom(that.xScale).ticks(10);
 
-	  	var xAxis = d3.axisBottom(that.xScale);
-
-	  	var yAxisGroup = that.mySvg.append("g")
-	                        .attr("class", "yAxis");
 
 	  	var yAxis = d3.axisLeft(that.yScale);
 
-	 	xAxisGroup.call(xAxis);
-	 	yAxisGroup.call(yAxis);
+	 	that.xAxisGroup.call(xAxis);
+	 	that.yAxisGroup.call(yAxis);
 
-		var parse = d3.timeParse("%d/%m/%Y");
 
 		var myCircles = that.mySvg.selectAll("circle").data(newData);
 

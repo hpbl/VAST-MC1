@@ -3,7 +3,7 @@ var data2 = [];
 var v = [];
 var vis = [];
 var parseDate = d3.timeParse("%Y-%m-%d %H:%M:%S");
-
+var carsType = [];
 
 for(let i = 0; i < data.length; i++) {
     id = data[i]['car-id'];
@@ -11,7 +11,8 @@ for(let i = 0; i < data.length; i++) {
         data2[id] = [];
     }
     vis[id] = 1;
-    data2[id].push( {"time" : parseDate(data[i]['Timestamp']) , "gate" : data[i]['gate-name'] } );
+    data2[id].push( {"time" : parseDate(data[i]['Timestamp']) , "gate" : data[i]['gate-name']} );
+    carsType[id] = data[i]["car-type"];
 }
 
 
