@@ -24,6 +24,14 @@ var mySVG = d3.select('.piechart')
                 .attr('height', 500)
                 .attr('width', 800)
 
+                mySVG.append('svg:image')
+                            .attr('xlink:href', '../Vehicles x Gates/PieChart/legend.png')
+                            .attr('x', '80')
+                            .attr('y', '80')
+                            .attr('height', '250')
+                            .attr('width', '50')
+
+
 // adding bg image
 var background = mySVG.append('g')
                       .attr('transform', "translate(150, 10) scale(2.5, 2.5)")
@@ -55,6 +63,7 @@ var points = background.selectAll('g')
                   .on('mouseout', function(d) {
                     mousenoton(Object.keys(d)[0]);
                   });
+
 
 
 function handleClick(groupClass) {
@@ -96,7 +105,7 @@ function mouseon(d) {
         .attr('style','opacity: 0.3;')
         .html(d+', ');
   } else {
-    d3.select('#activegates').select('#'+d).attr('style','color: red;');
+    d3.select('#activegates').select('#'+d).attr('style','color: tomato;');
   }
 }
 
