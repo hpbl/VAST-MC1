@@ -6,10 +6,9 @@ class PieChart {
 
     this.radius = Math.min(this.width, this.height) / 2
 
-    this.colorScale = d3.scaleOrdinal(['#3FB5D5', '#B22492', '#DD4848', '#EDA52A',
-      '#86A96C', '#AE3C16', '#1A7289'])
+    this.colorScale = d3.scaleOrdinal().domain(["1", "2","3", "4", "5", "6", "2P"]).range(['#3FB5D5', '#B22492', '#DD4848', '#EDA52A',
+      '#86A96C', '#AE3C16', '#1A7289']);
   }
-
   setData (data) {
     this.data = data
 
@@ -46,7 +45,7 @@ class PieChart {
 
     g.append('path')
           .attr('d', arc)
-          .attr('fill', function (d, i) { return that.colorScale(i) })
+          .attr('fill', function (d, i) { return that.colorScale(car[i]) })
           .attr('opacity', '0.5')
   }
 }

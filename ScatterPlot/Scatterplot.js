@@ -23,7 +23,7 @@ class ScatterPlot{
 		this.xScale = d3.scaleLinear().range([0, this.width]);
 
 		this.yScale = d3.scalePoint()
-                        .domain(["1", "2", "2P","3", "4", "5", "6"])
+                        .domain(["1", "2","3", "4", "5", "6", "2P"])
                         .range([this.height, 0 ])
                         .padding(1);
 
@@ -41,7 +41,8 @@ class ScatterPlot{
 	 	this.xAxisGroup.call(xAxis);
 	 	this.yAxisGroup.call(yAxis);
 
-        this.colorScale = d3.scaleOrdinal(d3.schemeCategory10);
+        this.colorScale = d3.scaleOrdinal().domain(["1", "2","3", "4", "5", "6", "2P"]).range(['#3FB5D5', '#B22492', '#DD4848', '#EDA52A',
+          '#86A96C', '#AE3C16', '#1A7289']);
     }
 
     generateScatterPlot(newData){
