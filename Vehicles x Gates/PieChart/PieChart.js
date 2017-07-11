@@ -10,8 +10,12 @@ class PieChart {
       '#86A96C', '#AE3C16', '#1A7289']);
   }
 
-    change(newData) {
+    change(newData, newDimensions) {
         var that = this;
+
+        this.height = newDimensions
+        this.width = newDimensions
+        this.radius = Math.min(this.width, this.height) / 2
 
         var arc = d3.arc()
             .outerRadius(that.radius - 10)
