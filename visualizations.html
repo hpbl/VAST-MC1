@@ -5,9 +5,10 @@
     <meta charset="utf-8">
     <title>G04</title>
     <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+
     <script src="libs/d3.v4.min.js"></script>
     <script src="libs/crossfilter2/crossfilter.min.js"></script>
-    <style>
+  <style>
     body {
       font-family: 'Raleway', sans-serif;
     }
@@ -53,18 +54,32 @@
     }
 
     .top {
-      display: flex;
+        display: flex;
     }
 
     #activegates {
-      text-align: center;
+        text-align: center;
     }
 
     #active {
-      color: black;
-      font-size: 18px;
-      font-style: italic;
+        color: black;
+        font-size: 18px;
+        font-style: italic;
     }
+
+    div.tooltip {
+    	position: absolute;
+    	text-align: center;
+    	width: 80px;
+    	padding: 2px;
+    	font: 10px sans-serif;
+    	background: lightsteelblue;
+    	border: 0px;
+    	border-radius: 3px;
+    	pointer-events: none;
+    	z-index: 1;
+	}
+
 
     </style>
 </head>
@@ -86,14 +101,17 @@
   </div>
 
 
+
   <script src="Data/uniquedates.js"></script>
   <script src="Data/Parsed Lekagul Sensor Data.json"></script>
   <script src="Data/nodes.json"></script>
+  
+  <script src="TimeLine/Preprocess.js"></script> 
+  
   <script src="Data/parsingData.js"></script>
   <script src="Vehicles x Gates/PieChart/PieChart.js"></script>
   <script src="Vehicles x Gates/PieChart/GatesData.js"></script>
 
-  <script src="TimeLine/Preprocess.js"></script>
   <script src="ScatterPlot/Scatterplot.js"></script>
   <script src="TimeLine/timeline.js"></script>
   <script src="Histogram/histogram.js"></script>
