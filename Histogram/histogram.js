@@ -83,9 +83,19 @@ function brushed() {
     if (currentX0 !== null && currentX1 !== null){
         generateTimeLine(currentGates, currentX0, currentX1);
         groupedData = groupData( gates, data, currentX0, currentX1);
-        //console.log(groupedData);
+        let lengths = []
+        for (let i = 0; i < groupedData.length; i++) {
+          let curLen = 0;
+          for (let j=0; j < groupedData[i].length; j++) {
+            curLen = curLen + groupedData[i][j].length
+          }
+          lengths.push(curLen)
+        }
+        let sizeScale = d3.scaleLinear().range([25, 40]).domain(d3.extent(lengths))
+
         for(let i = 0; i < piecharts.length; i++) {
-            piecharts[i].change(groupedData[i]);
+            let currentDimensions = sizeScale(lengths[i])
+            piecharts[i].change(groupedData[i], currentDimensions);
         }
     }
 }
