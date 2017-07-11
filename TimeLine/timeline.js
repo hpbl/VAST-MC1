@@ -7,12 +7,27 @@ height2 = 8000, width2 = 1500;
 var cars  = [];
 var mark  = [];
 
-var mySvg2 = d3.select(".timeline")
+
+var legendSVG = d3.select(".legend")
+                    .append("svg")
+                    .attr("width", 500)
+          				  .attr("height", 40)
+                      .append('svg:image')
+                          .attr('xlink:href', '../TimeLine/legend.png')
+                          .attr('x', margin.left)
+                          .attr('y', '0')
+                          .attr('height', '50')
+                          .attr('width', '250')
+
+var mySvg2 = d3.select(".overflow")
   				  .append("svg")
   				  .attr("width", width2 + margin.left + margin.right)
   				  .attr("height", height2 + margin.top + margin.bottom)
-                  .append("g")
-                  .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+              .append("g")
+                .attr("transform", "translate(" + margin.left + "," + (margin.top + 50) + ")");
+
+
+
 
 var div = d3.select(".timeline").append("div")
   					.attr("class", "tooltip")
