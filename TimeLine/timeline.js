@@ -55,7 +55,6 @@ function generateTimeLine(currentGates, start, end) {
             for ( let j = 0; j < aux.length; j++) {
                 if (aux[j].time >= start && aux[j].time <= end && aux[j]['gate'] == gate) {
                     boo = 1;
-
                     break;
                 }
             }
@@ -108,7 +107,6 @@ function generateTimeLine(currentGates, start, end) {
         for(let i = 0; i < paths.length; i++) {
             let tpaths = paths[i].split(" ");
             tpaths.pop();
-            console.log(paths[i]);
             for(let j = 0; j < tpaths.length; j++) {
                 cars.push({"x": 9*j, "y": 0.7*i, "gate": tpaths[j], "line": i} );
             }

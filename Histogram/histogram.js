@@ -15,11 +15,9 @@ var mySvg = d3.select(".histogram")
                   .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 
-
 var x = d3.scaleTime()
           .domain([new Date(2015, 4, 1), new Date(2016, 5, 1)])
           .rangeRound([0, width]);
-
 
 
 var parseDate = d3.timeParse("%Y-%m-%d %H:%M:%S");
@@ -82,6 +80,12 @@ function brushed() {
     currentX0 = x.invert(d3.event.selection[0]);
     currentX1 = x.invert(d3.event.selection[1]);
 
-    if (currentX0 !== null && currentX1 !== null)
+    if (currentX0 !== null && currentX1 !== null){
         generateTimeLine(currentGates, currentX0, currentX1);
+        groupedData = groupData( gates, data, currentX0, currentX1);
+        //console.log(groupedData);
+        for(let i = 0; i < piecharts.length; i++) {
+            piecharts[i].change(groupedData[i]);
+        }
+    }
 }

@@ -9,6 +9,21 @@ class PieChart {
     this.colorScale = d3.scaleOrdinal().domain(["1", "2","3", "4", "5", "6", "2P"]).range(['#3FB5D5', '#B22492', '#DD4848', '#EDA52A',
       '#86A96C', '#AE3C16', '#1A7289']);
   }
+
+    change(newData) {
+        var that = this;
+
+        var arc = d3.arc()
+            .outerRadius(that.radius - 10)
+            .innerRadius(0);
+
+        var pie = d3.pie()
+        	        .value(function(d) { return d.length; })(newData);
+
+        let path = that.group.selectAll("path").data(pie); // Compute the new angles
+        path.attr("d", arc); // redrawing the path
+    }
+
   setData (data) {
     this.data = data
 
@@ -18,9 +33,10 @@ class PieChart {
         .outerRadius(that.radius - 10)
         .innerRadius(0)
 
-    var labelArc = d3.arc()
-            .outerRadius(that.radius - 40)
-            .innerRadius(that.radius - 40)
+    //
+    // var labelArc = d3.arc()
+    //         .outerRadius(that.radius - 40)
+    //         .innerRadius(that.radius - 40)
 
     var pie = d3.pie()
             .sort(null)

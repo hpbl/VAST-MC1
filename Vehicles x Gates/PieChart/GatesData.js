@@ -54,6 +54,7 @@ var points = background.selectAll('g')
                   .append('g')
                   .attr('transform', function (d) { return 'translate(' + nodes[Object.keys(d)[0]].pos[0] + ',' + nodes[Object.keys(d)[0]].pos[1] + ')' })
                   .attr('class', function(d) { return Object.keys(d)[0] })//[0]?
+                  .attr("id", "pie")
                   .on('click', function(d) {
                     handleClick(Object.keys(d)[0])
                   })
