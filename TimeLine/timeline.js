@@ -27,12 +27,6 @@ var mySvg2 = d3.select(".overflow")
                 .attr("transform", "translate(" + margin.left + "," + (margin.top + 50) + ")");
 
 
-
-
-var div = d3.select(".timeline").append("div")
-  					.attr("class", "tooltip")
-  					.style("display", "none");
-
 var yScale = d3.scaleLinear().domain([0, 1000]).range([height2, 0]);
 var xScale = d3.scaleLinear().domain([0,1000]).range([0,width2]);
 
@@ -156,9 +150,6 @@ function generateTimeLine(currentGates, start, end) {
 
 function clicked(index){
     //scatterplot
-    console.log("passou");
-    console.log(index);
-    console.log(carsPaths[paths[index]] );
 
     scp.generateScatterPlot( carsPaths[paths[index]] );
 }

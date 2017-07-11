@@ -53,18 +53,31 @@
     }
 
     .top {
-      display: flex;
+        display: flex;
     }
 
     #activegates {
-      text-align: center;
+        text-align: center;
     }
 
     #active {
-      color: black;
-      font-size: 18px;
-      font-style: italic;
+        color: black;
+        font-size: 18px;
+        font-style: italic;
     }
+
+    div.tooltip {
+    	position: absolute;
+    	text-align: center;
+    	width: 80px;
+    	padding: 2px;
+    	font: 10px sans-serif;
+    	background: lightsteelblue;
+    	border: 0px;
+    	border-radius: 3px;
+    	pointer-events: none;
+    	z-index: 1;
+	}
 
     </style>
 </head>
